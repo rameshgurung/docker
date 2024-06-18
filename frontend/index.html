@@ -12,8 +12,9 @@
   </div>
 
   <script>
-    // fetch('/api/users')
-    fetch('http://localhost:3000/api/users')
+    fetch('/api/users')
+    // fetch('http://localhost:3000/api/users')
+    // fetch('http://backend:3000/api/users')
       .then(response => response.json())
       .then(data => {
         var userList = document.getElementById('user-list');

@@ -18,10 +18,10 @@ const dbConfig = {
 app.get('/api/users', async (req, res) => {
   try {
     const connection = await mysql.createConnection(dbConfig);
-    // const [rows] = await connection.execute('SELECT * FROM users');
-    const [rows] = [
-      {username:'ramesh gurung'}
-    ]
+    const [rows] = await connection.execute('SELECT * FROM users');
+    // const [rows] = [
+    //   {username:'ramesh gurung'}
+    // ]
     connection.end();
     res.json(rows);
   } catch (error) {
@@ -31,6 +31,7 @@ app.get('/api/users', async (req, res) => {
 });
 
 // Start the backend server
-app.listen(port, () => {
+// app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {  
   console.log(`Backend server is running at http://localhost:${port}`);
 });

@@ -4,3 +4,4 @@ FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
 # Copy the frontend code
 COPY ./index.html .
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
