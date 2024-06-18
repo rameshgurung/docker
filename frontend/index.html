@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Docker Compose Example</title>
+</head>
+<body>
+  <h1>Hello from Frontend</h1>
+  
+  <div id="backend-response">
+    <p>Backend API Response:</p>
+    <ul id="user-list"></ul>
+  </div>
+
+  <script>
+    // fetch('/api/users')
+    fetch('http://localhost:3000/api/users')
+      .then(response => response.json())
+      .then(data => {
+        var userList = document.getElementById('user-list');
+        data.forEach(user => {
+          userList.innerHTML += '<li>' + user.username + '</li>';
+        });
+      })
+      .catch(error => console.error('Error fetching data from the backend:', error));
+  </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+version: '1'
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "81:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend/src:/usr/share/app/src
+      - ./backend/nodemon.json:/usr/share/app/nodemon.json
+    depends_on:
+      - db
+  db:
+    build:
+      context: ./db
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+    # volumes:
+    #   - D:\learn\docker\html_express_mysql\data\mysql:/var/lib/mysql
