@@ -6,12 +6,16 @@ const app = express();
 const port = 3000;
 app.use(cors()) // allow all
 
+const path = require('path');
+
+require('dotenv').config({ path: path.resolve(__dirname, '../backend.env') });
+
 // MySQL connection configuration
 const dbConfig = {
-  host: 'db',
-  user: 'root',
-  password: 'root_password',
-  database: 'mydatabase'
+  host: process.env.DB_HOST, // service name on docker-compose file
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
 };
 
 // Sample route to fetch data from the database
@@ -22,6 +26,7 @@ app.get('/api/users', async (req, res) => {
     // const [rows] = [
     //   {username:'ramesh gurung'}
     // ]
+    console.log('rows', rows);
     connection.end();
     res.json(rows);
   } catch (error) {

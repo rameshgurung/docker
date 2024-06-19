@@ -8,9 +8,7 @@ services:
     volumes:
       - ./frontend:/usr/share/nginx/html
     networks:
-      - my-network  
-    environment:
-          - BACKEND_API_URL=http://backend:3000/api/users      
+      - my-network   
   backend:
     build:
       context: ./backend
@@ -19,6 +17,8 @@ services:
     volumes:
       - ./backend/src:/usr/share/app/src
       - ./backend/nodemon.json:/usr/share/app/nodemon.json
+    env_file:
+      - ./backend.env    
     networks:
       - my-network       
     depends_on:
@@ -26,12 +26,22 @@ services:
   db:
     build:
       context: ./db
-    environment:
-      MYSQL_ROOT_PASSWORD: root_password
+    # environment:
+    #   MYSQL_ROOT_PASSWORD: root
+    env_file:
+      - ./db.env    
     networks:
       - my-network       
-    # volumes:
-    #   - D:\learn\docker\html_express_mysql\data\mysql:/var/lib/mysql
+    volumes:
+      # - ./database_data:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
 networks:
   my-network:
     driver: bridge  
+# volumes:
+#   db-data:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: ${PWD}/database_data 

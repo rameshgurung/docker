@@ -9,15 +9,15 @@ COPY ./package*.json ./
 
 # Install dependencies, including the additional 'mysql' library
 # RUN npm config set registry http://registry.npmjs.org/
-# RUN npm config set registry http://registry.npmjs.org/
+
 RUN npm config set proxy http://103.5.229.10:8080
 RUN npm config set https-proxy http://103.5.229.10:8080
 RUN npm config set ca null
 RUN npm config set strict-ssl false
 
-# Debug step to check npm configuration and network connectivity
-RUN npm config list \
- && npm ping
+# # Debug step to check npm configuration and network connectivity
+# RUN npm config list \
+#  && npm ping
 
 RUN npm install
 
