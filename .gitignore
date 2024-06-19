@@ -7,3 +7,5 @@
 
 # **/: Matches any level of directories recursively.
 **/node_modules
+/database_data
+/test
