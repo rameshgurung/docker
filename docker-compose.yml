@@ -26,22 +26,13 @@ services:
   db:
     build:
       context: ./db
-    # environment:
-    #   MYSQL_ROOT_PASSWORD: root
     env_file:
       - ./db.env    
     networks:
       - my-network       
     volumes:
-      # - ./database_data:/var/lib/mysql
+      - ./database_data:/var/lib/mysql
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
 networks:
   my-network:
-    driver: bridge  
-# volumes:
-#   db-data:
-#     driver: local
-#     driver_opts:
-#       type: none
-#       o: bind
-#       device: ${PWD}/database_data 
+    driver: bridge
